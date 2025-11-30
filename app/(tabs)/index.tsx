@@ -18,7 +18,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Welcome to my app..!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
@@ -39,7 +39,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <Link href="/modal">
           <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
+            <ThemedText type="subtitle" className='d-none text-red-500'>Step 2: Explore</ThemedText>
           </Link.Trigger>
           <Link.Preview />
           <Link.Menu>
@@ -60,7 +60,7 @@ export default function HomeScreen() {
           </Link.Menu>
         </Link>
 
-        <ThemedText>
+        <ThemedText className="text-red-500">
           {`Tap the Explore tab to learn more about what's included in this starter app.`}
         </ThemedText>
       </ThemedView>
