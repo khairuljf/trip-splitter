@@ -1,98 +1,97 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Link } from 'expo-router';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { AppHeader } from '@/components/app-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { groups } from '@/constants/groups';
+import { useAppDrawer } from '@/hooks/use-app-drawer';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome to my app..!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle" className='d-none text-red-500'>Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const { Drawer, openDrawer } = useAppDrawer();
 
-        <ThemedText className="text-red-500">
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  return (
+    <ThemedView style={styles.screen}>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+          <AppHeader onMenuPress={openDrawer} />
+
+          <View style={styles.sectionHeader}>
+            <ThemedText type="subtitle">Your groups</ThemedText>
+            <ThemedText className="text-gray-500">
+              {groups.length} active · tap a group to view details
+            </ThemedText>
+          </View>
+
+          <View style={styles.groupList}>
+            {groups.map((group) => (
+              <Link
+                key={group.id}
+                href={{ pathname: '/group/[id]', params: { id: group.id } }}
+                asChild>
+                <Pressable style={styles.groupCard}>
+                  <View style={styles.groupInfo}>
+                    <ThemedText type="subtitle">{group.name}</ThemedText>
+                    <ThemedText className="text-gray-500">
+                      {group.members.length} members · {group.destination}
+                    </ThemedText>
+                  </View>
+                  <View style={styles.cardRight}>
+                    <ThemedText className="text-emerald-600 font-semibold">
+                      ${group.yourShare.toFixed(2)}
+                    </ThemedText>
+                    <MaterialIcons name="chevron-right" size={20} color="#9CA3AF" />
+                  </View>
+                </Pressable>
+              </Link>
+            ))}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+      {Drawer}
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  screen: {
+    flex: 1,
+  },
+  safeArea: {
+    flex: 1,
+  },
+  content: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    gap: 24,
+  },
+  sectionHeader: {
+    gap: 4,
+  },
+  groupList: {
+    gap: 12,
+  },
+  groupCard: {
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'space-between',
+    elevation: 1,
+    shadowColor: '#000000',
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    shadowOffset: { height: 2, width: 0 },
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  groupInfo: {
+    flex: 1,
+    gap: 4,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  cardRight: {
+    alignItems: 'flex-end',
+    gap: 4,
   },
 });
