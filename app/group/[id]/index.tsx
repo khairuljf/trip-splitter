@@ -1,6 +1,6 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
-import { Link, router, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -63,15 +63,15 @@ export default function GroupDetailsScreen() {
               <ThemedText type="subtitle">${group.totalExpense.toFixed(2)}</ThemedText>
             </View>
 
-            <Link href={{ pathname: '/group/[id]/members', params: { id: group.id } }} asChild>
-              <Pressable style={[styles.infoCard, styles.infoLink]}>
-                <View>
-                  <ThemedText className="text-gray-500">Members</ThemedText>
-                  <ThemedText type="subtitle">{group.members.length} people</ThemedText>
-                </View>
-                <MaterialIcons name="people-alt" size={20} color="#10B981" />
-              </Pressable>
-            </Link>
+            <Pressable
+              style={[styles.infoCard, styles.infoLink]}
+              onPress={() => router.push(`/group/${group.id}/members`)}>
+              <View>
+                <ThemedText className="text-gray-500">Members</ThemedText>
+                <ThemedText type="subtitle">{group.members.length} people</ThemedText>
+              </View>
+              <MaterialIcons name="people-alt" size={20} color="#10B981" />
+            </Pressable>
           </View>
 
           <View style={styles.statsCard}>

@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -11,6 +11,7 @@ import { useAppDrawer } from '@/hooks/use-app-drawer';
 
 export default function HomeScreen() {
   const { Drawer, openDrawer } = useAppDrawer();
+  const router = useRouter();
 
   return (
     <ThemedView style={styles.screen}>
@@ -27,25 +28,23 @@ export default function HomeScreen() {
 
           <View style={styles.groupList}>
             {groups.map((group) => (
-              <Link
+              <Pressable
                 key={group.id}
-                href={{ pathname: '/group/[id]', params: { id: group.id } }}
-                asChild>
-                <Pressable style={styles.groupCard}>
-                  <View style={styles.groupInfo}>
-                    <ThemedText type="subtitle">{group.name}</ThemedText>
-                    <ThemedText className="text-gray-500">
-                      {group.members.length} members · {group.destination}
-                    </ThemedText>
-                  </View>
-                  <View style={styles.cardRight}>
-                    <ThemedText className="text-emerald-600 font-semibold">
-                      ${group.yourShare.toFixed(2)}
-                    </ThemedText>
-                    <MaterialIcons name="chevron-right" size={20} color="#9CA3AF" />
-                  </View>
-                </Pressable>
-              </Link>
+                style={styles.groupCard}
+                onPress={() => router.push(`/group/${group.id}`)}>
+                <View style={styles.groupInfo}>
+                  <ThemedText type="subtitle">{group.name}</ThemedText>
+                  <ThemedText className="text-gray-500">
+                    {group.members.length} members · {group.destination}
+                  </ThemedText>
+                </View>
+                <View style={styles.cardRight}>
+                  <ThemedText className="text-emerald-600 font-semibold">
+                    ${group.yourShare.toFixed(2)}
+                  </ThemedText>
+                  <MaterialIcons name="chevron-right" size={20} color="#9CA3AF" />
+                </View>
+              </Pressable>
             ))}
           </View>
         </ScrollView>
@@ -95,3 +94,4 @@ const styles = StyleSheet.create({
     gap: 4,
   },
 });
+
