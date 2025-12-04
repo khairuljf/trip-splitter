@@ -8,6 +8,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { groups } from '@/constants/groups';
 import { useAppDrawer } from '@/hooks/use-app-drawer';
+import "../global.css";
+
 
 export default function HomeScreen() {
   const { Drawer, openDrawer } = useAppDrawer();
@@ -26,7 +28,7 @@ export default function HomeScreen() {
             </ThemedText>
           </View>
 
-          <View style={styles.groupList}>
+          <View style={styles.groupList} className='d-flex flex-col gap-3'>
             {groups.map((group) => (
               <Pressable
                 key={group.id}
