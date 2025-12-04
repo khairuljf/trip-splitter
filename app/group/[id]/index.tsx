@@ -1,7 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -14,9 +14,9 @@ export default function GroupDetailsScreen() {
 
   if (!group) {
     return (
-      <ThemedView style={styles.fallback}>
+      <ThemedView className="flex-1 items-center justify-center gap-4 p-5">
         <ThemedText type="subtitle">Group not found</ThemedText>
-        <Pressable style={styles.backButton} onPress={() => router.back()}>
+        <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={() => router.back()}>
           <ThemedText className="text-white font-semibold">Go back</ThemedText>
         </Pressable>
       </ThemedView>
@@ -24,22 +24,22 @@ export default function GroupDetailsScreen() {
   }
 
   return (
-    <ThemedView style={styles.screen}>
-      <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-          <View style={styles.topBar}>
-            <Pressable style={styles.iconButton} onPress={() => router.back()}>
+    <ThemedView className="flex-1">
+      <SafeAreaView className="flex-1">
+        <ScrollView contentContainerClassName="gap-5 p-5" showsVerticalScrollIndicator={false}>
+          <View className="flex-row items-center justify-between">
+            <Pressable className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100" onPress={() => router.back()}>
               <MaterialIcons name="arrow-back-ios-new" size={18} color="#111827" />
             </Pressable>
             <ThemedText type="subtitle">{group.name}</ThemedText>
-            <Pressable style={styles.iconButton}>
+            <Pressable className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
               <MaterialIcons name="settings" size={20} color="#111827" />
             </Pressable>
           </View>
 
-          <View style={styles.banner}>
-            <Image source={group.banner} style={styles.bannerImage} />
-            <View style={styles.bannerOverlay}>
+          <View className="overflow-hidden rounded-3xl bg-slate-900">
+            <Image source={group.banner} className="h-40 w-full" />
+            <View className="absolute inset-0 justify-end gap-2 bg-slate-900/50 p-5">
               <ThemedText type="title" className="text-white">
                 {group.destination}
               </ThemedText>
@@ -47,24 +47,24 @@ export default function GroupDetailsScreen() {
             </View>
           </View>
 
-          <View style={styles.infoGrid}>
-            <View style={styles.infoCard}>
+          <View className="flex-row flex-wrap gap-3">
+            <View className="basis-[48%] gap-1 rounded-2xl bg-white p-4 shadow shadow-black/10">
               <ThemedText className="text-gray-500">Group creator</ThemedText>
               <ThemedText type="subtitle">{group.creator}</ThemedText>
             </View>
 
-            <View style={styles.infoCard}>
+            <View className="basis-[48%] gap-1 rounded-2xl bg-white p-4 shadow shadow-black/10">
               <ThemedText className="text-gray-500">Your cost</ThemedText>
               <ThemedText type="subtitle">${group.yourShare.toFixed(2)}</ThemedText>
             </View>
 
-            <View style={styles.infoCard}>
+            <View className="basis-[48%] gap-1 rounded-2xl bg-white p-4 shadow shadow-black/10">
               <ThemedText className="text-gray-500">Total expenses</ThemedText>
               <ThemedText type="subtitle">${group.totalExpense.toFixed(2)}</ThemedText>
             </View>
 
             <Pressable
-              style={[styles.infoCard, styles.infoLink]}
+              className="basis-[48%] flex-row items-center justify-between gap-1 rounded-2xl bg-white p-4 shadow shadow-black/10"
               onPress={() => router.push(`/group/${group.id}/members`)}>
               <View>
                 <ThemedText className="text-gray-500">Members</ThemedText>
@@ -74,14 +74,14 @@ export default function GroupDetailsScreen() {
             </Pressable>
           </View>
 
-          <View style={styles.statsCard}>
+          <View className="gap-4 rounded-3xl bg-gray-900 p-5">
             <ThemedText type="subtitle">Expense statistics</ThemedText>
             <ThemedText className="text-gray-500">
               A quick breakdown of how this group is spending together.
             </ThemedText>
 
             {group.stats.map((stat) => (
-              <View key={stat.label} style={styles.statRow}>
+              <View key={stat.label} className="flex-row items-center justify-between">
                 <View>
                   <ThemedText>{stat.label}</ThemedText>
                   {stat.hint ? <ThemedText className="text-gray-500">{stat.hint}</ThemedText> : null}
@@ -91,7 +91,7 @@ export default function GroupDetailsScreen() {
             ))}
           </View>
 
-          <Pressable style={styles.settleButton}>
+          <Pressable className="mt-2 items-center rounded-2xl bg-sky-500 py-4">
             <ThemedText className="text-white font-semibold">Settle up expenses</ThemedText>
           </Pressable>
         </ScrollView>
@@ -99,99 +99,3 @@ export default function GroupDetailsScreen() {
     </ThemedView>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-  safeArea: {
-    flex: 1,
-  },
-  content: {
-    padding: 20,
-    gap: 20,
-  },
-  topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  iconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: '#F3F4F6',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  banner: {
-    borderRadius: 24,
-    overflow: 'hidden',
-    backgroundColor: '#0f172a',
-  },
-  bannerImage: {
-    width: '100%',
-    height: 160,
-  },
-  bannerOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    padding: 20,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(15, 23, 42, 0.45)',
-    gap: 8,
-  },
-  infoGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  infoCard: {
-    flexBasis: '48%',
-    padding: 16,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    gap: 4,
-    shadowColor: '#000000',
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
-    shadowOffset: { height: 2, width: 0 },
-    elevation: 1,
-  },
-  infoLink: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  statsCard: {
-    padding: 20,
-    borderRadius: 20,
-    backgroundColor: '#111827',
-    gap: 16,
-  },
-  statRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  settleButton: {
-    marginTop: 10,
-    paddingVertical: 16,
-    borderRadius: 16,
-    backgroundColor: '#0EA5E9',
-    alignItems: 'center',
-  },
-  fallback: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 16,
-    padding: 20,
-  },
-  backButton: {
-    backgroundColor: '#0EA5E9',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 999,
-  },
-});
-
