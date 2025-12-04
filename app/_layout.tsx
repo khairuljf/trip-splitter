@@ -8,6 +8,8 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
+  console.log("env", process.env.FIREBASE_API_KEY)
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
