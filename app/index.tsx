@@ -18,36 +18,38 @@ export default function HomeScreen() {
   return (
     <ThemedView className="flex-1">
       <SafeAreaView className="flex-1">
-        <ScrollView contentContainerClassName="px-5 pb-8 gap-6" showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerClassName="pb-8 gap-6" showsVerticalScrollIndicator={false}>
           <AppHeader onMenuPress={openDrawer} />
 
-          <View className="gap-1">
-            <ThemedText type="subtitle">Your groups</ThemedText>
-            <ThemedText className="text-gray-500">
-              {groups.length} active · tap a group to view details
-            </ThemedText>
-          </View>
+          <View className="px-6">
+            <View className="gap-1">
+              <ThemedText type="subtitle">Your groups</ThemedText>
+              <ThemedText className="text-gray-500">
+                {groups.length} active · tap a group to view details
+              </ThemedText>
+            </View>
 
-          <View className="flex flex-col gap-3">
-            {groups.map((group) => (
-              <Pressable
-                key={group.id}
-                className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}`)}>
-                <View className="flex-1 gap-1">
-                  <ThemedText type="subtitle">{group.name}</ThemedText>
-                  <ThemedText className="text-gray-500">
-                    {group.members.length} members · {group.destination}
-                  </ThemedText>
-                </View>
-                <View className="items-end gap-1">
-                  <ThemedText className="text-emerald-600 font-semibold">
-                    ${group.yourShare.toFixed(2)}
-                  </ThemedText>
-                  <MaterialIcons name="chevron-right" size={20} color="#9CA3AF" />
-                </View>
-              </Pressable>
-            ))}
+            <View className="flex flex-col gap-3">
+              {groups.map((group) => (
+                <Pressable
+                  key={group.id}
+                  className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
+                  onPress={() => router.push(`/group/${group.id}`)}>
+                  <View className="flex-1 gap-1">
+                    <ThemedText type="subtitle">{group.name}</ThemedText>
+                    <ThemedText className="text-gray-500">
+                      {group.members.length} members · {group.destination}
+                    </ThemedText>
+                  </View>
+                  <View className="items-end gap-1">
+                    <ThemedText className="text-emerald-600 font-semibold">
+                      ${group.yourShare.toFixed(2)}
+                    </ThemedText>
+                    <MaterialIcons name="chevron-right" size={20} color="#9CA3AF" />
+                  </View>
+                </Pressable>
+              ))}
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

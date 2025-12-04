@@ -14,6 +14,28 @@ export type GroupStat = {
   hint?: string;
 };
 
+export type GroupExpense = {
+  id: string;
+  category: string;
+  amount: number;
+  user: string;
+  date: string;
+  icon: string;
+  tint: string;
+  iconColor: string;
+};
+
+export type EqualizationPayment = {
+  id: string;
+  from: string;
+  to: string;
+  amount: number;
+  currency: string;
+  fromAvatar?: string;
+  toAvatar?: string;
+  isYou?: boolean;
+};
+
 export type TravelGroup = {
   id: string;
   name: string;
@@ -25,6 +47,11 @@ export type TravelGroup = {
   yourShare: number;
   members: GroupMember[];
   stats: GroupStat[];
+  expenses: GroupExpense[];
+  equalization: {
+    yourPayments: EqualizationPayment[];
+    otherPayments: EqualizationPayment[];
+  };
 };
 
 export const groups: TravelGroup[] = [
@@ -72,6 +99,63 @@ export const groups: TravelGroup[] = [
       { label: 'Food & Dining', value: '$520.25', hint: 'Groceries + brunch' },
       { label: 'Activities', value: '$360.25', hint: 'Ski passes & tours' },
     ],
+    expenses: [
+      {
+        id: 'friends-stay',
+        category: 'Cabin rental',
+        amount: 520,
+        user: 'Sofia Patel',
+        date: 'Mar 04 · 09:30 AM',
+        icon: 'home-filled',
+        tint: '#DCFCE7',
+        iconColor: '#15803D',
+      },
+      {
+        id: 'friends-food',
+        category: 'Groceries',
+        amount: 210.25,
+        user: 'Marcus Lee',
+        date: 'Mar 04 · 01:10 PM',
+        icon: 'local-grocery-store',
+        tint: '#E0F2FE',
+        iconColor: '#0EA5E9',
+      },
+      {
+        id: 'friends-activity',
+        category: 'Ski passes',
+        amount: 360.25,
+        user: 'Naomi Carter',
+        date: 'Mar 05 · 08:00 AM',
+        icon: 'downhill-skiing',
+        tint: '#FCE7F3',
+        iconColor: '#BE185D',
+      },
+    ],
+    equalization: {
+      yourPayments: [
+        {
+          id: 'friends-you-1',
+          from: 'You',
+          to: 'Sofia Patel',
+          amount: 118.33,
+          currency: 'USD',
+          fromAvatar: 'https://i.pravatar.cc/150?img=47',
+          toAvatar: 'https://i.pravatar.cc/150?img=4',
+          isYou: true,
+        },
+      ],
+      otherPayments: [
+        {
+          id: 'friends-others-1',
+          from: 'Marcus Lee',
+          to: 'Naomi Carter',
+          amount: 92.5,
+          currency: 'USD',
+          fromAvatar: 'https://i.pravatar.cc/150?img=12',
+          toAvatar: 'https://i.pravatar.cc/150?img=31',
+        },
+      ],
+    },
   },
   {
     id: 'bali-retreat',
@@ -117,6 +201,63 @@ export const groups: TravelGroup[] = [
       { label: 'Experiences', value: '$960.50', hint: 'Surf, yoga, temples' },
       { label: 'Dining', value: '$740.45', hint: 'Daily shared meals' },
     ],
+    expenses: [
+      {
+        id: 'bali-villa',
+        category: 'Villa deposit',
+        amount: 820,
+        user: 'Jonas Müller',
+        date: 'Apr 11 · 10:15 AM',
+        icon: 'villa',
+        tint: '#E0E7FF',
+        iconColor: '#4338CA',
+      },
+      {
+        id: 'bali-dining',
+        category: 'Shared dinner',
+        amount: 240.45,
+        user: 'Fatima Noor',
+        date: 'Apr 12 · 07:45 PM',
+        icon: 'restaurant',
+        tint: '#FFF7ED',
+        iconColor: '#EA580C',
+      },
+      {
+        id: 'bali-experience',
+        category: 'Surf lessons',
+        amount: 360.5,
+        user: 'Lucas Almeida',
+        date: 'Apr 13 · 06:40 AM',
+        icon: 'surfing',
+        tint: '#ECFEFF',
+        iconColor: '#0891B2',
+      },
+    ],
+    equalization: {
+      yourPayments: [
+        {
+          id: 'bali-you-1',
+          from: 'You',
+          to: 'Jonas Müller',
+          amount: 215.45,
+          currency: 'USD',
+          fromAvatar: 'https://i.pravatar.cc/150?img=48',
+          toAvatar: 'https://i.pravatar.cc/150?img=14',
+          isYou: true,
+        },
+      ],
+      otherPayments: [
+        {
+          id: 'bali-others-1',
+          from: 'Fatima Noor',
+          to: 'Lucas Almeida',
+          amount: 134.25,
+          currency: 'USD',
+          fromAvatar: 'https://i.pravatar.cc/150?img=22',
+          toAvatar: 'https://i.pravatar.cc/150?img=7',
+        },
+      ],
+    },
   },
 ];
 

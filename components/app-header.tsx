@@ -13,7 +13,7 @@ type AppHeaderProps = {
 
 export function AppHeader({ onMenuPress, avatarUri = DEFAULT_AVATAR }: AppHeaderProps) {
   return (
-    <View className='flex-row items-center justify-between mt-2'>
+    <View className=' px-6 flex-row items-center justify-between mt-2'>
       <Pressable
         className='h-10 w-10 rounded-md bg-slate-200 items-center justify-center'
         accessibilityRole="button"
