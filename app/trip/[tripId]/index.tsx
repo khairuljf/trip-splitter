@@ -1,4 +1,3 @@
-export { default } from '../../trip/[tripId]/index';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -6,13 +5,13 @@ import { useState } from 'react';
 import { Modal, Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { getGroupById } from '@/constants/groups';
+import { ThemedText } from '@/components/shared/themed-text';
+import { ThemedView } from '@/components/shared/themed-view';
+import { getGroupById } from '@/libs/constants';
 
-export default function GroupDetailsScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
-  const group = getGroupById(id);
+export default function TripDetailsScreen() {
+  const params = useLocalSearchParams<{ tripId?: string; id?: string }>();
+  const group = getGroupById(params.tripId ?? params.id);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const baseCurrency = 'USD';
 
@@ -53,7 +52,7 @@ export default function GroupDetailsScreen() {
             </View>
 
             <View className="gap-3 px-6">
-              <View className="gap-1 items-center justify-center rounded-2xl bg-white p-4 shadow shadow-black/10">
+            <View className="gap-1 items-center justify-center rounded-2xl bg-white p-4 shadow shadow-black/10">
                 <View className="flex-row  gap-2">
                   <ThemedText className="text-gray-500">Group creator:</ThemedText>
                   <ThemedText >{group.creator},</ThemedText>
@@ -68,7 +67,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/expenses`)}>
+                onPress={() => router.push(`/trip/${group.id}/expenses`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="receipt-long" size={20} color="#0EA5E9" />
                   <ThemedText className="text-gray-500">Total expenses</ThemedText>
@@ -81,7 +80,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/members`)}>
+                onPress={() => router.push(`/trip/${group.id}/members`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="people-alt" size={20} color="#10B981" />
                   <ThemedText className="text-gray-500">Members</ThemedText>
@@ -94,7 +93,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/settle`)}>
+                onPress={() => router.push(`/trip/${group.id}/settle`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="account-balance-wallet" size={20} color="#F97316" />
                   <ThemedText className="text-gray-500">SettleTrip</ThemedText>
@@ -127,8 +126,8 @@ export default function GroupDetailsScreen() {
               <ThemedText className="text-white font-semibold">Settle up expenses</ThemedText>
             </Pressable>
           </ScrollView>
-        </SafeAreaView >
-      </ThemedView >
+        </SafeAreaView>
+      </ThemedView>
       <Modal
         visible={settingsOpen}
         transparent

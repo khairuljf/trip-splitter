@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/shared/themed-text';
 import { ThemedView } from '@/components/shared/themed-view';
 import { useAppDrawer } from '@/hooks/use-app-drawer';
 
-export default function AboutScreen() {
+export default function SettingsScreen() {
   const { Drawer, openDrawer } = useAppDrawer();
 
   return (
@@ -15,10 +15,9 @@ export default function AboutScreen() {
         <ScrollView contentContainerClassName="gap-3 p-6" showsVerticalScrollIndicator={false}>
           <AppHeader onMenuPress={openDrawer} />
           <View className="gap-2">
-            <ThemedText type="title">About Trip Splitter</ThemedText>
+            <ThemedText type="title">Settings</ThemedText>
             <ThemedText className="text-gray-500">
-              Track shared expenses, understand group spending, and settle up in a single place.
-              This screen is ready for your story, FAQs, or product pitch.
+              This is a placeholder page. Plug in real profile details whenever you are ready.
             </ThemedText>
           </View>
         </ScrollView>
