@@ -4,11 +4,23 @@ import { StatusBar } from 'expo-status-bar';
 import "../global.css";
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { isOnline } from '@/library/network';
+import { useEffect } from 'react';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   console.log("env", process.env.FIREBASE_API_KEY)
+
+  console.log("isOnline", isOnline());
+
+  useEffect(() => {
+    // createTables();
+    //syncFromFirebase();
+    //syncToFirebase();
+  }, []);
+
+
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
