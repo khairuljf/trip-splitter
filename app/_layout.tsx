@@ -1,34 +1,32 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import "../global.css";
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { isOnline } from '@/library/network';
+import { Stack } from 'expo-router';
 import { useEffect } from 'react';
+
+import '../global.css';
+
+import { syncService } from '@/api/sync/syncService';
+import { initTables } from '@/db/initTables';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
-  console.log("env", process.env.FIREBASE_API_KEY)
-
-  console.log("isOnline", isOnline());
-
   useEffect(() => {
-    // createTables();
-    //syncFromFirebase();
-    //syncToFirebase();
+    initTables();
+    void syncService.downloadExpenses();
   }, []);
-
-
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="group/[id]/index" />
-        <Stack.Screen name="group/[id]/members" />
-        <Stack.Screen name="profile" />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="trip/[tripId]/index" />
+        <Stack.Screen name="trip/[tripId]/members" />
+        <Stack.Screen name="trip/[tripId]/expenses" />
+        <Stack.Screen name="trip/[tripId]/add-expense" />
+        <Stack.Screen name="trip/[tripId]/equalization" />
+        <Stack.Screen name="trip/[tripId]/settle" />
         <Stack.Screen name="about" />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
