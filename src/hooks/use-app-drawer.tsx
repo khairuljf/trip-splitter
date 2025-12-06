@@ -2,8 +2,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
+import { ThemedText } from '../components/shared/';
 
-import { ThemedText } from '@/components/shared/themed-text';
 
 const DRAWER_WIDTH = 260;
 

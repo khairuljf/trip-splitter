@@ -3,18 +3,17 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { getGroupById } from '@/libs/constants';
+import { ThemedView, ThemedText } from '@/src/components/shared';
+import { getGroupById } from '@/src/libs/constants';
 
 export default function TripExpensesScreen() {
-  const params = useLocalSearchParams<{ tripId?: string; id?: string }>();
-  const group = getGroupById(params.tripId ?? params.id);
+    const params = useLocalSearchParams<{ tripId?: string; id?: string }>();
+    const group = getGroupById(params.tripId ?? params.id);
 
     if (!group) {
         return (
             <ThemedView className="flex-1 items-center justify-center gap-4 p-5">
-        <ThemedText type="subtitle">Trip not found</ThemedText>
+                <ThemedText type="subtitle">Trip not found</ThemedText>
                 <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={() => router.back()}>
                     <ThemedText className="text-white font-semibold">Go back</ThemedText>
                 </Pressable>

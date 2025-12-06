@@ -1,10 +1,8 @@
 import { router } from 'expo-router';
 import { Pressable, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { groups } from '@/libs/constants';
+import { ThemedView, ThemedText } from '../../src/components/shared';
+import { groups } from '../../src/libs/constants';
 
 export default function TripsScreen() {
     return (

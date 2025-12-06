@@ -1,12 +1,14 @@
-import { firebaseDB } from '@/api/firebase/firebaseConfig';
-import { db as offlineDB } from '@/db/sqlite';
-import { isOnline } from '@/hooks/useOnlineStatus';
+
 import { doc, setDoc } from 'firebase/firestore';
+import { isOnline } from '../../hooks/useOnlineStatus';
+import { db } from '@/src/db/sqlite';
+import { firebaseDB } from '../firebase/firebaseConfig';
+
 
 export const uploadExpenses = async () => {
-  if (!(await isOnline()) || !offlineDB) return;
+  if (!(await isOnline()) || !db) return;
 
-  offlineDB.transaction((tx) => {
+  db.transaction((tx: SQLTransaction) => {
     tx.executeSql(
       'SELECT * FROM items WHERE synced = 0',
       [],
@@ -16,7 +18,7 @@ export const uploadExpenses = async () => {
             title: item.title,
           });
 
-          offlineDB.transaction((txNested) => {
+          db.transaction((txNested: SQLTransaction) => {
             txNested.executeSql('UPDATE items SET synced = 1 WHERE id = ?', [item.id]);
           });
         }

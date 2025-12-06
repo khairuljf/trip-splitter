@@ -1,10 +1,8 @@
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppDrawer } from '../src/hooks/use-app-drawer';
+import { ThemedView, AppHeader, ThemedText } from '../src/components/shared';
 
-import { AppHeader } from '@/components/shared/app-header';
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { useAppDrawer } from '@/hooks/use-app-drawer';
 
 export default function AboutScreen() {
   const { Drawer, openDrawer } = useAppDrawer();

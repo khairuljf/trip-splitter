@@ -2,12 +2,10 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAppDrawer } from '../../src/hooks/use-app-drawer';
+import { ThemedView, AppHeader, ThemedText } from '../../src/components/shared';
+import { groups } from '../../src/libs/constants';
 
-import { AppHeader } from '@/components/shared/app-header';
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { groups } from '@/libs/constants';
-import { useAppDrawer } from '@/hooks/use-app-drawer';
 
 
 

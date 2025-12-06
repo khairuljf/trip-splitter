@@ -1,6 +1,5 @@
 import { Link } from 'expo-router';
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
+import { ThemedView, ThemedText } from '../src/components/shared';
 
 export default function ModalScreen() {
   return (

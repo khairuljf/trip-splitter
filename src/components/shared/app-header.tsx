@@ -1,8 +1,8 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
 import { Pressable, View } from 'react-native';
+import { ThemedText } from './themed-text';
 
-import { ThemedText } from '@/components/shared/themed-text';
 
 const DEFAULT_AVATAR = 'https://i.pravatar.cc/120?img=5';
 

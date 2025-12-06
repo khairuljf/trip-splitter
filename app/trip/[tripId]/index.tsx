@@ -1,3 +1,6 @@
+import { ThemedText } from '@/src/components/shared/themed-text';
+import { ThemedView } from '@/src/components/shared/themed-view';
+import { getGroupById } from '@/src/libs/constants';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -5,9 +8,7 @@ import { useState } from 'react';
 import { Modal, Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { getGroupById } from '@/libs/constants';
+
 
 export default function TripDetailsScreen() {
   const params = useLocalSearchParams<{ tripId?: string; id?: string }>();
@@ -52,7 +53,7 @@ export default function TripDetailsScreen() {
             </View>
 
             <View className="gap-3 px-6">
-            <View className="gap-1 items-center justify-center rounded-2xl bg-white p-4 shadow shadow-black/10">
+              <View className="gap-1 items-center justify-center rounded-2xl bg-white p-4 shadow shadow-black/10">
                 <View className="flex-row  gap-2">
                   <ThemedText className="text-gray-500">Group creator:</ThemedText>
                   <ThemedText >{group.creator},</ThemedText>

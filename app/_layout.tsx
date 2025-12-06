@@ -4,10 +4,10 @@ import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 
 import '../global.css';
+import { useColorScheme } from 'react-native';
+import { syncService } from '../src/api/sync/syncService';
+import { initTables } from '@/src/db/initTables';
 
-import { syncService } from '@/api/sync/syncService';
-import { initTables } from '@/db/initTables';
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

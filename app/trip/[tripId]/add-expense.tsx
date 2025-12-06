@@ -3,9 +3,8 @@ import { Pressable, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 
-import { ThemedText } from '@/components/shared/themed-text';
-import { ThemedView } from '@/components/shared/themed-view';
-import { saveOffline } from '@/db/expenseRepo';
+import { ThemedView, ThemedText } from '@/src/components/shared';
+import { saveOffline } from '@/src/db/expenseRepo';
 
 export default function AddExpenseScreen() {
   const params = useLocalSearchParams<{ tripId?: string; id?: string }>();
@@ -24,7 +23,7 @@ export default function AddExpenseScreen() {
       <SafeAreaView className="flex-1 p-6 gap-6">
         <View className="gap-2">
           <ThemedText type="subtitle">Add expense</ThemedText>
-        <ThemedText className="text-gray-500">Trip id: {tripId}</ThemedText>
+          <ThemedText className="text-gray-500">Trip id: {tripId}</ThemedText>
         </View>
         <TextInput
           placeholder="Expense title"
