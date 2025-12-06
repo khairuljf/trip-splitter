@@ -32,9 +32,8 @@ export function useAppDrawer() {
 
   const drawerItems = useMemo(
     () => [
-      { label: 'Home', icon: 'home', path: '/(tabs)/home' },
-      { label: 'Trips', icon: 'hiking', path: '/(tabs)/trips' },
-      { label: 'Settings', icon: 'settings', path: '/(tabs)/settings' },
+      { label: 'Home', icon: 'home', path: '/' },
+      { label: 'Trips', icon: 'hiking', path: 'group' },
       { label: 'About', icon: 'info', path: '/about' },
     ],
     [],
