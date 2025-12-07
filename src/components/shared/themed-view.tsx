@@ -1,8 +1,8 @@
+import { useThemeColor } from '@/src/hooks/use-theme-color';
 import { cssInterop } from 'nativewind';
 import { forwardRef } from 'react';
 import { View, type ViewProps } from 'react-native';
 
-import { useThemeColor } from '@/hooks/use-theme-color';
 
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;

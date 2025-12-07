@@ -1,10 +1,9 @@
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppHeader } from '@/components/app-header';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { useAppDrawer } from '@/hooks/use-app-drawer';
+
+import { useAppDrawer } from '@/src/hooks/use-app-drawer';
+import { AppHeader, ThemedText, ThemedView } from '@/src/components/shared';
 
 export default function ProfileScreen() {
   const { Drawer, openDrawer } = useAppDrawer();

@@ -1,12 +1,12 @@
+import { ThemedText, ThemedView } from '@/src/components/shared';
+import { getGroupById } from '@/src/libs/constants';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { getGroupById } from '@/constants/groups';
+
 
 type ListSectionProps = {
     title: string;
@@ -64,12 +64,19 @@ const PaymentSection = ({ title, payments }: ListSectionProps) => {
 export default function EqualizationScreen() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const group = getGroupById(id);
+    const handleBack = () => {
+        if (router.canGoBack && router.canGoBack()) {
+            router.back();
+        } else {
+            router.push('/');
+        }
+    };
 
     if (!group) {
         return (
             <ThemedView className="flex-1 items-center justify-center gap-4 p-5">
                 <ThemedText type="subtitle">Group not found</ThemedText>
-                <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={() => router.back()}>
+                <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={handleBack}>
                     <ThemedText className="text-white font-semibold">Go back</ThemedText>
                 </Pressable>
             </ThemedView>
@@ -81,7 +88,9 @@ export default function EqualizationScreen() {
             <SafeAreaView className="flex-1">
                 <ScrollView contentContainerClassName="gap-6 p-5 pb-12" showsVerticalScrollIndicator={false}>
                     <View className="flex-row items-center justify-between">
-                        <Pressable className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100" onPress={() => router.back()}>
+                        <Pressable
+                            className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100"
+                            onPress={handleBack}>
                             <MaterialIcons name="arrow-back-ios-new" size={18} color="#111827" />
                         </Pressable>
                         <ThemedText type="subtitle">Equalization payments</ThemedText>

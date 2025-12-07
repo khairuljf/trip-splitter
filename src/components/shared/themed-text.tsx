@@ -1,8 +1,8 @@
+import { useThemeColor } from '@/src/hooks/use-theme-color';
 import { cssInterop } from 'nativewind';
 import { forwardRef } from 'react';
 import { StyleSheet, Text, type TextProps } from 'react-native';
 
-import { useThemeColor } from '@/hooks/use-theme-color';
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -13,12 +13,12 @@ export type ThemedTextProps = TextProps & {
 
 const ThemedTextBase = forwardRef<Text, ThemedTextProps>(function ThemedTextBase(
   {
-  style,
-  lightColor,
-  darkColor,
-  type = 'default',
-  ...rest
-}: ThemedTextProps,
+    style,
+    lightColor,
+    darkColor,
+    type = 'default',
+    ...rest
+  }: ThemedTextProps,
   ref
 ) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');

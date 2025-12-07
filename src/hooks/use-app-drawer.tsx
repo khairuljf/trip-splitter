@@ -2,8 +2,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, View } from 'react-native';
+import { ThemedText } from '../components/shared/';
 
-import { ThemedText } from '@/components/themed-text';
 
 const DRAWER_WIDTH = 260;
 
@@ -32,8 +32,8 @@ export function useAppDrawer() {
 
   const drawerItems = useMemo(
     () => [
-      { label: 'Groups', icon: 'group-work', path: '/' },
-      { label: 'Profile', icon: 'person', path: '/profile' },
+      { label: 'Home', icon: 'home', path: '/' },
+      { label: 'Trips', icon: 'hiking', path: 'group' },
       { label: 'About', icon: 'info', path: '/about' },
     ],
     [],
@@ -41,11 +41,6 @@ export function useAppDrawer() {
 
   const handleNavigate = (path: string) => {
     setIsOpen(false);
-    if (path === '/') {
-      router.push('/');
-      return;
-    }
-
     router.push(path as any);
   };
 

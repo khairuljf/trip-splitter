@@ -3,9 +3,10 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import "../global.css";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { isOnline } from '@/library/network';
+
 import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
+import { isOnline } from '../src/hooks/useOnlineStatus';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

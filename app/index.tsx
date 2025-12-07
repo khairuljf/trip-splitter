@@ -3,11 +3,9 @@ import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppHeader } from '@/components/app-header';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { groups } from '@/constants/groups';
-import { useAppDrawer } from '@/hooks/use-app-drawer';
+import { AppHeader, ThemedText, ThemedView } from '@/src/components/shared';
+import { groups } from '@/src/libs/constants';
+import { useAppDrawer } from '@/src/hooks/use-app-drawer';
 
 
 
