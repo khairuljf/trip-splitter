@@ -13,12 +13,19 @@ export default function GroupDetailsScreen() {
   const group = getGroupById(id);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const baseCurrency = 'USD';
+  const handleBack = () => {
+    if (router.canGoBack && router.canGoBack()) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
 
   if (!group) {
     return (
       <ThemedView className="flex-1 items-center justify-center gap-4 p-5">
         <ThemedText type="subtitle">Group not found</ThemedText>
-        <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={() => router.back()}>
+        <Pressable className="rounded-full bg-sky-500 px-6 py-3" onPress={handleBack}>
           <ThemedText className="text-white font-semibold">Go back</ThemedText>
         </Pressable>
       </ThemedView>
@@ -31,7 +38,7 @@ export default function GroupDetailsScreen() {
         <SafeAreaView className="flex-1">
           <ScrollView contentContainerClassName="gap-5" showsVerticalScrollIndicator={false}>
             <View className="px-6 flex-row items-center justify-between">
-              <Pressable className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100" onPress={() => router.back()}>
+              <Pressable className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100" onPress={handleBack}>
                 <MaterialIcons name="arrow-back-ios-new" size={18} color="#111827" />
               </Pressable>
               <ThemedText type="subtitle">{group.name}</ThemedText>
