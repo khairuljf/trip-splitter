@@ -32,9 +32,10 @@ export function useAppDrawer() {
 
   const drawerItems = useMemo(
     () => [
-      { label: 'Home', icon: 'home', path: '/' },
-      { label: 'Trips', icon: 'hiking', path: 'group' },
-      { label: 'About', icon: 'info', path: '/about' },
+      { label: 'Trips', icon: 'hiking', path: '/' },
+      { label: 'Profile', icon: 'info', path: '/profile' },
+      { label: 'Help', icon: 'help', path: '/help' },
+      { label: 'About', icon: 'about', path: '/about' },
     ],
     [],
   );
@@ -43,6 +44,10 @@ export function useAppDrawer() {
     setIsOpen(false);
     router.push(path as any);
   };
+
+  const handleLogout = () => {
+    console.log('logout');
+  }
 
   let Drawer: ReactNode = null;
   if (isVisible) {
@@ -61,6 +66,10 @@ export function useAppDrawer() {
                 <ThemedText type="defaultSemiBold">{item.label}</ThemedText>
               </Pressable>
             ))}
+            <Pressable style={styles.drawerItem} onPress={handleLogout}>
+              <MaterialIcons name="logout" size={20} color="#0F172A" />
+              <ThemedText type="defaultSemiBold">Logout</ThemedText>
+            </Pressable>
           </View>
         </Animated.View>
       </>

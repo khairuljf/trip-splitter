@@ -21,7 +21,7 @@ export default function HomeScreen() {
 
           <View className="px-6">
             <View className="gap-1">
-              <ThemedText type="subtitle">Your groups</ThemedText>
+              <ThemedText type="subtitle">Your Trips</ThemedText>
               <ThemedText className="text-gray-500">
                 {groups.length} active · tap a group to view details
               </ThemedText>
