@@ -27,10 +27,15 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="group/[id]/index" />
-        <Stack.Screen name="group/[id]/members" />
+        <Stack.Screen name="trip/[id]/index" />
+        <Stack.Screen name="trip/[id]/members" />
+        <Stack.Screen name="trip/[id]/expenses" />
+        <Stack.Screen name="trip/[id]/payments" />
+        <Stack.Screen name="trip/[id]/invites" />
+        <Stack.Screen name="trip/[id]/settings" />
         <Stack.Screen name="profile" />
         <Stack.Screen name="about" />
+        <Stack.Screen name="help" />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
       <StatusBar style="auto" />

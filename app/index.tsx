@@ -32,7 +32,7 @@ export default function HomeScreen() {
                 <Pressable
                   key={group.id}
                   className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                  onPress={() => router.push(`/group/${group.id}`)}>
+                  onPress={() => router.push(`/trip/${group.id}`)}>
                   <View className="flex-1 gap-1">
                     <ThemedText type="subtitle">{group.name}</ThemedText>
                     <ThemedText className="text-gray-500">

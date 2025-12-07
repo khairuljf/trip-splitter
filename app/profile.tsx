@@ -11,13 +11,15 @@ export default function ProfileScreen() {
   return (
     <ThemedView className="flex-1">
       <SafeAreaView className="flex-1">
-        <ScrollView contentContainerClassName="gap-3 p-6" showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerClassName="pb-8 gap-6" showsVerticalScrollIndicator={false}>
           <AppHeader onMenuPress={openDrawer} />
-          <View className="gap-2">
-            <ThemedText type="title">Your profile</ThemedText>
-            <ThemedText className="text-gray-500">
-              This is a placeholder page. Plug in real profile details whenever you are ready.
-            </ThemedText>
+          <View className="px-6">
+            <View className="gap-1">
+              <ThemedText type="title">Your Profile</ThemedText>
+              <ThemedText className="text-gray-500">
+                This is a placeholder page. Plug in real profile details whenever you are ready.
+              </ThemedText>
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

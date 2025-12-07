@@ -73,7 +73,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/expenses`)}>
+                onPress={() => router.push(`/trip/${group.id}/expenses`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="receipt-long" size={20} color="#0EA5E9" />
                   <ThemedText className="text-gray-500">Total expenses</ThemedText>
@@ -86,7 +86,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/members`)}>
+                onPress={() => router.push(`/trip/${group.id}/members`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="people-alt" size={20} color="#10B981" />
                   <ThemedText className="text-gray-500">Members</ThemedText>
@@ -99,7 +99,7 @@ export default function GroupDetailsScreen() {
 
               <Pressable
                 className="flex-row items-center justify-between rounded-2xl bg-white p-4 shadow shadow-black/10"
-                onPress={() => router.push(`/group/${group.id}/settle`)}>
+                onPress={() => router.push(`/trip/${group.id}/settle`)}>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="account-balance-wallet" size={20} color="#F97316" />
                   <ThemedText className="text-gray-500">SettleTrip</ThemedText>
@@ -111,26 +111,8 @@ export default function GroupDetailsScreen() {
               </Pressable>
             </View>
 
-            <View className="gap-4 rounded-3xl bg-gray-900 p-5">
-              <ThemedText type="subtitle">Expense statistics</ThemedText>
-              <ThemedText className="text-gray-500">
-                A quick breakdown of how this group is spending together.
-              </ThemedText>
 
-              {group.stats.map((stat) => (
-                <View key={stat.label} className="flex-row items-center justify-between">
-                  <View>
-                    <ThemedText>{stat.label}</ThemedText>
-                    {stat.hint ? <ThemedText className="text-gray-500">{stat.hint}</ThemedText> : null}
-                  </View>
-                  <ThemedText type="defaultSemiBold">{stat.value}</ThemedText>
-                </View>
-              ))}
-            </View>
 
-            <Pressable className="mt-2 items-center rounded-2xl bg-sky-500 py-4">
-              <ThemedText className="text-white font-semibold">Settle up expenses</ThemedText>
-            </Pressable>
           </ScrollView>
         </SafeAreaView >
       </ThemedView >
